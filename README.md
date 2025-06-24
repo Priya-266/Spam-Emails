@@ -43,17 +43,30 @@ No manual input is needed as these values are computed using basic text parsing.
 
 - **Dataset:** 4,601 emails (UCI Spambase via TidyTuesday)  
 - **Train/Test Split:** 80% training, 20% testing  
-- **Accuracy:** 88.03%  
-- **Precision (spam):** 90.91%  
-- **Recall (spam):** 77.35%  
-- **Kappa:** 0.7426  
+
+Two models were trained and evaluated using an 80/20 train-test split on the TidyTuesday spam dataset:
+
+### 🔹 1. Random Forest Classifier
+- **Accuracy:** 88.25%
+- **Precision (spam):** 90.97%
+- **Recall (spam):** 77.90%
+- **Kappa:** 0.7475
+
+### 🔹 2. Logistic Regression Classifier
+- **Accuracy:** 84.33%
+- **Precision (spam):** 93.25%
+- **Recall (spam):** 64.92%
+- **Kappa:** 0.6534
+
+Although the logistic regression model achieved a slightly lower overall accuracy and recall compared to Random Forest, it had **higher precision**, meaning it made fewer false positive errors. Random Forest remains the better balanced option for this dataset, while logistic regression offers interpretability and simplicity.
 
 ---
 
 ## Files in This Repository
 
 - `spam.csv` – The dataset  
-- `spam_model.R` – Model training script  
-- `eval.Rmd` – Evaluation script  
+- `Spam_model.R` – Model training script for Random Forest
+- `eval.Rmd` – Evaluation script for Random Forest 
 - `README.md` – This documentation  
+- `Spam_model_logreg.R` – Model training and evaluation script for Logistic regression
 
