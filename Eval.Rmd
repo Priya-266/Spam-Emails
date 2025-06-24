@@ -1,0 +1,22 @@
+---
+title: "Untitled"
+author: "Kamala Priya Annavarapu"
+date: "2025-06-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+# Load model and test set
+model <- readRDS("C:/Users/ka1404/OneDrive - USNH/Documents/spam_rf_model.rds")
+predictions <- predict(model, newdata = test)
+
+# Evaluate
+confusionMatrix(predictions, test$yesno, positive = "y")
+
+```
+
