@@ -58,7 +58,19 @@ Two models were trained and evaluated using an 80/20 train-test split on the Tid
 - **Recall (spam):** 64.92%
 - **Kappa:** 0.6534
 
-Although the logistic regression model achieved a slightly lower overall accuracy and recall compared to Random Forest, it had **higher precision**, meaning it made fewer false positive errors. Random Forest remains the better balanced option for this dataset, while logistic regression offers interpretability and simplicity.
+### 🔹 3. XGBoost Classifier
+- **Accuracy:** 87.38%
+- **Precision (spam):** 88.92%
+- **Recall (spam):** 77.62%
+- **Kappa:** 0.7296
+
+Insights:
+
+Random Forest remains the strongest performer overall.
+
+XGBoost performs almost as well, with slightly lower accuracy but competitive metrics.
+
+Logistic Regression is best for interpretability but has lower recall.
 
 ---
 
@@ -69,4 +81,5 @@ Although the logistic regression model achieved a slightly lower overall accurac
 - `eval.Rmd` – Evaluation script for Random Forest 
 - `README.md` – This documentation  
 - `Spam_model_logreg.R` – Model training and evaluation script for Logistic regression
+- `Spam_model_xgboost.R` – Model training and evaluation script for XGBoost Classifier
 
