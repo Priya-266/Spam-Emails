@@ -1,85 +1,91 @@
+# 📧 Spam Classifier – Random Forest (R)
 
-# Spam Classifier – Random Forest (R)
+A lightweight, interpretable machine learning model that classifies email messages as **spam** or **not spam** based on key text-derived features.
 
-A simple and interpretable machine learning model to detect spam email messages using basic text features like word and character frequency.  
-Built using **Random Forest in R**, the model achieved **88% accuracy** on unseen test data. It was trained on the [TidyTuesday spam dataset (2023-08-15)](https://github.com/rfordatascience/tidytuesday/tree/main/data/2023/2023-08-15#spam-e-mail).
-
----
-
-## Use Cases
-- Email spam filtering for academic or demo purposes  
-- Lightweight filter for SMS bots or contact forms  
-- Introductory classification model for students and educators  
+Deployed with an interactive **Shiny app GUI** and an **API endpoint** using `vetiver`, `plumber`, and Docker on [Hugging Face Spaces](https://huggingface.co/spaces/Kamalapriyaannavarapu/SpamEmailsClassifier).
 
 ---
 
-## Model Details
-
-| Feature       | Description                        |
-|---------------|------------------------------------|
-| **Algorithm** | Random Forest                      |
-| **Input**     | 6 numerical features from email text |
-| **Target**    | spam (`y`) or ham (`n`)            |
-| **Accuracy**  | 88.03% (on 20% holdout test set)   |
+## 🔍 Use Cases
+- 🔪 Academic demo: ML model deployment and interface design
+- 📩 Lightweight spam filter for SMS bots or contact forms
+- 🎓 Teaching tool for classification modeling in R
 
 ---
 
-## Input Features (Predictors)
+## 🧠 Model Details
 
-The model uses the following 6 numeric predictors, all automatically extracted from the email body:
-
-- `crl.tot`: Total capital letters  
-- `dollar`: Frequency of `$`  
-- `bang`: Frequency of `!`  
-- `money`: Frequency of the word “money”  
-- `n000`: Frequency of “000”  
-- `make`: Frequency of the word “make”  
-
-No manual input is needed as these values are computed using basic text parsing.
+| Property        | Value                             |
+|----------------|-----------------------------------|
+| **Algorithm**   | Random Forest                     |
+| **Input**       | 6 numeric features from email text |
+| **Target**      | Binary classification: spam (y/n) |
+| **Accuracy**    | **88.25%** on 20% test set         |
+| **Training Set**| 4,601 emails (UCI Spambase dataset via TidyTuesday 2023-08-15) |
 
 ---
 
-## Training & Evaluation
+## 📅 Input Features
 
-- **Dataset:** 4,601 emails (UCI Spambase via TidyTuesday)  
-- **Train/Test Split:** 80% training, 20% testing  
+The model uses basic NLP features that are automatically parsed from email text (no manual extraction required):
 
-Two models were trained and evaluated using an 80/20 train-test split on the TidyTuesday spam dataset:
-
-### 🔹 1. Random Forest Classifier
-- **Accuracy:** 88.25%
-- **Precision (spam):** 90.97%
-- **Recall (spam):** 77.90%
-- **Kappa:** 0.7475
-
-### 🔹 2. Logistic Regression Classifier
-- **Accuracy:** 84.33%
-- **Precision (spam):** 93.25%
-- **Recall (spam):** 64.92%
-- **Kappa:** 0.6534
-
-### 🔹 3. XGBoost Classifier
-- **Accuracy:** 87.38%
-- **Precision (spam):** 88.92%
-- **Recall (spam):** 77.62%
-- **Kappa:** 0.7296
-
-Insights:
-
-Random Forest remains the strongest performer overall.
-
-XGBoost performs almost as well, with slightly lower accuracy but competitive metrics.
-
-Logistic Regression is best for interpretability but has lower recall.
+| Feature   | Description                                |
+|-----------|--------------------------------------------|
+| `crl.tot` | Total capital letters in email             |
+| `dollar`  | Frequency of the `$` symbol                |
+| `bang`    | Frequency of the `!` symbol                |
+| `money`   | Frequency of the word "money"              |
+| `n000`    | Frequency of the sequence "000"            |
+| `make`    | Frequency of the word "make"               |
 
 ---
 
-## Files in This Repository
+## 📊 Model Comparison
 
-- `spam.csv` – The dataset  
-- `Spam_model.R` – Model training script for Random Forest
-- `eval.Rmd` – Evaluation script for Random Forest 
-- `README.md` – This documentation  
-- `Spam_model_logreg.R` – Model training and evaluation script for Logistic regression
-- `Spam_model_xgboost.R` – Model training and evaluation script for XGBoost Classifier
+| Model               | Accuracy | Precision (Spam) | Recall (Spam) | Kappa  |
+|---------------------|----------|------------------|----------------|--------|
+| **Random Forest**   | **88.25%** | 90.97%          | 77.90%         | 0.7475 |
+| Logistic Regression | 84.33%   | 93.25%           | 64.92%         | 0.6534 |
+| XGBoost             | 87.38%   | 88.92%           | 77.62%         | 0.7296 |
+
+**Insight:**  
+✅ Random Forest delivered the best balance of precision and recall.  
+⚙️ XGBoost was competitive but slightly lower in accuracy.  
+🔍 Logistic Regression is highly interpretable, though lower in recall.
+
+---
+
+## 🛠️ Files in This Repository
+
+| File                      | Description                                          |
+|---------------------------|------------------------------------------------------|
+| `spam.csv`                | Cleaned dataset from UCI Spambase                    |
+| `Spam_model.R`            | Random Forest training script                        |
+| `eval.Rmd`                | Model evaluation notebook with visualizations        |
+| `Spam_model_logreg.R`     | Logistic regression model training and evaluation    |
+| `Spam_model_xgboost.R`    | XGBoost model training and evaluation                |
+| `README.md`               | Project documentation (you’re reading it!)           |
+
+---
+
+## 🚀 Deployment
+
+- Trained using `tidymodels` + `vetiver`
+- API exposed via `plumber`
+- Deployed with Docker to Hugging Face Spaces
+- Live Shiny app connects to the API endpoint and provides user interface for predictions
+
+---
+
+## 📌 Try It Out
+
+🔗 **[Live API endpoint (Plumber)](https://kamalapriyaannavarapu-spammail.hf.space/__docs__/)**  
+🔗 **[Interactive Shiny App](https://huggingface.co/spaces/Kamalapriyaannavarapu/shinyapp)**
+
+---
+
+## ✅ Next Steps
+
+- Add support for raw text input using text preprocessing (TF-IDF or token counts)
+- Improve UI with styling and user feedback messages
 
